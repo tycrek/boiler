@@ -1,0 +1,29 @@
+plugins {
+	// This
+	id 'java'
+	// or this
+    id 'java-library'
+
+	// Include if using JitPack for builds
+    id 'maven-publish'
+
+	// Shadow for local fat jars
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+
+	// Lombok boilerplate plugin
+    id 'io.freefair.lombok' version '6.3.0'
+}
+
+// Required for JitPack, I think
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+// Adds a task to IntelliJ that updates Gradle to the specified version
+task updateGradle(type: Wrapper) {
+    gradleVersion = '7.3.3'
+}
